@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Livre d'or</title>
-</head>
-<body>
-    <h1>Bienvenue sur le livre d'or</h1>
-    <p><%= test %></p>
-</body>
-</html>
+<%- include('header'); -%>
+
+<form action="/" method="post" class="ui form">
+    <div class="field">
+        <label for="message">Message</label>
+        <textarea name="message" id="message" ></textarea>
+    </div>
+    <button type="submit" class="ui blue labeled submit icon button">
+        <i class="icon edit"></i>Envoyer
+    </button>
+</form>
+
+<%- include('footer'); -%>
