@@ -7,6 +7,10 @@ class Message {
         this.row = row;
     }
 
+    get id () {
+        return this.row.id;
+    }
+
     get message () {
         return this.row.message;
     }
@@ -30,10 +34,22 @@ class Message {
 
     static findAll (cb) {
         connectionDB.query(
-            'SELECT * FROM message',
+            'SELECT * FROM message ORDER BY created_at DESC ',
             (err, rows) => {
                 if (err) throw err;
                 cb(rows.map((row) => new Message(row)));
+            });
+    }
+
+    static find (id, cb) {
+        connectionDB.query(
+            'SELECT * FROM message WHERE id=? LIMIT 1',
+            [
+                id,
+            ],
+            (err, row) => {
+                if (err) throw err;
+                cb(new Message(row[0]));
             });
     }
 

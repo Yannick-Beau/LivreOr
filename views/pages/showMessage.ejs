@@ -1,0 +1,20 @@
+<%- include('header'); -%>
+
+<div class="ui comments">
+    <h2 class="ui dividing header" id="title_show">
+        Commentaire
+    </h2>
+        <article class="comment">
+            <a href="/message/<%= message.id %>" class="avatar">
+                <img class="logo" src="https://www.nicepng.com/png/detail/420-4206231_livre-dor-quill-and-paper-png.png" alt="logo d'un parchemin avec une plume">
+            </a>
+            <div class="metadata">
+                <%= message.created_at.calendar() %>
+            </div>
+            <div class="content">
+                <%= message.message %>
+            </div>
+        </article>
+</div>
+
+<%- include('footer'); -%>

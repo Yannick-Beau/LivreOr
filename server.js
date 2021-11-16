@@ -45,6 +45,12 @@ app.post('/', (request, response) => {
         });
     }
 });
-
+app.get('/message/:id', (request, response) => {
+    Message.find(request.params.id, (message) => {
+        response.render('pages/showMessage', {
+            message: message,
+        });
+    });
+});
 
 app.listen(8080);
