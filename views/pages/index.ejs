@@ -1,5 +1,8 @@
 <%- include('header'); -%>
 
+<h2 class="ui dividing header" id="title">
+    Ajouter un commentaire
+</h2>
 <form action="/" method="post" class="ui form">
     <div class="field">
         <label for="message">Message</label>
@@ -9,5 +12,24 @@
         <i class="icon edit"></i>Envoyer
     </button>
 </form>
+
+<div class="ui comments">
+    <h2 class="ui dividing header">
+        Commentaires
+    </h2>
+    <% for (message of messages) { %>
+        <article class="comment">
+            <a href="/message/<%= message.id %>" class="avatar">
+                <img class="logo" src="https://www.nicepng.com/png/detail/420-4206231_livre-dor-quill-and-paper-png.png" alt="logo d'un parchemin avec une plume">
+            </a>
+            <div class="metadata">
+                <%= message.created_at.calendar() %>
+            </div>
+            <div class="content">
+                <%= message.message %>
+            </div>
+        </article>
+    <% } %>    
+</div>
 
 <%- include('footer'); -%>

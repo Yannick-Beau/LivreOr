@@ -5,6 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const flashMiddleware = require('./middlewares/flash');
+const Message = require('./models/Message');
 
 // Moteur de template
 app.set('view engine', 'ejs');
@@ -23,17 +24,27 @@ app.use(flashMiddleware);
 
 // Routes
 app.get('/', (request, response) => {
-    if (request.session.error) {
-        response.locals.error = request.session.error;
-        request.session.error = '';
-    }
-    response.render('pages/index');
+    Message.findAll((messages) => {
+        response.render(
+            'pages/index',
+            {
+                messages: messages,
+            },
+        );
+    });
+    
 });
 app.post('/', (request, response) => {
     if (request.body.message === undefined || request.body.message === '') {
         request.flash('error', "Vous n'avez pas entré de message");
         response.redirect('/');
+    } else {
+        Message.create(request.body.message, () => {
+            request.flash('success', "Merci ! Votre message à bien été enregistré");
+            response.redirect('/');
+        });
     }
 });
+
 
 app.listen(8080);

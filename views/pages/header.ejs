@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/semantic/semantic.min.css">
     <style>
-        .main.container{
+        #title{
             margin-top: 5rem;
+        }
+        .logo{
+            width: 3rem;
+            height: 3rem;
         }
     </style>
     <title>Livre d'or</title>
@@ -21,4 +25,9 @@
         <div class="ui negative message">
             <%= flash.error %>
         </div>
+        <% } %>
+        <% if (locals.flash && locals.flash.success) { %>
+            <div class="ui positive message">
+                <%= flash.success %>
+            </div>
         <% } %>
